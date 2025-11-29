@@ -7,6 +7,8 @@ import p3 from "./assets/p3.jpg";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { IoIosCall } from "react-icons/io";
 import { MdPlace } from "react-icons/md";
+import { ToastContainer, toast, Bounce } from "react-toastify";
+import logo from "./assets/logo.png"
 import { NavLink } from "react-router-dom";
 function App() {
   const [name,setName]=useState("")
@@ -15,36 +17,45 @@ function App() {
 
   const handleSubmit=(e)=>{
     e.preventDefault()       //stops page reload
-    console.log(name,email,message)
-    setName(name)
-    setEmail(email)
-    setMessage(message)
+
+    if (!name || !email || !message) {
+      toast.error("Please fill all fields!");
+      return;
+    }
+
+    toast("Form Submitted", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    });
+
+    setName("");
+    setEmail("");
+    setMessage("");
   }
   return (
     <>
-      <nav className="bg-amber-200 p-4 shadow-xs shadow-black">
+      <nav className="bg-amber-200 p-4 shadow-xs shadow-black fixed w-full top-0">
         <div className="flex justify-between items-center ">
-          <h1 className="text-black text-2xl font-bold">eStudy</h1>
-          <ul className="flex gap-5 text-black font-medium">
-            <li>
-              <NavLink to="/home">Home</NavLink>
-            </li>
-            <li>
-              <NavLink to="/about">About</NavLink>
-            </li>
-            <li> 
-              <NavLink to="/courses">Courses</NavLink> 
-            </li>
-            <li>
-              <NavLink to="/review">Review</NavLink>
-            </li>
-            <li>
-              <NavLink to="/contact">Contact</NavLink>
-            </li>
+          <h1 className="text-black text-2xl font-bold flex  items-center">
+            <img src={logo}  alt="" className="w-10" />
+            eStudy</h1>
+          <ul className="flex gap-5 text-black font-medium ">
+         <li><a href="#home">Home</a></li>
+            <li><a href="#aboutUs">About</a></li>
+            <li><a href="#courses">Courses</a></li>
+            <li><a href="#reviews">Review</a></li>
+            <li><a href="#Contact">Contact</a></li>
           </ul>
         </div>
       </nav>
-      <div  className="bg-[#fcf8ed] flex p-4">
+      <div id="home" className="bg-[#fcf8ed] flex p-4 pt-20">
         <div>
           <h1 className=" text-bold text-amber-500 text-4xl font-medium p-6 ">
             {" "}
@@ -57,12 +68,12 @@ function App() {
             tablets, or mobile phones. In e-study, lessons, notes, videos, and
             quizzes are shared online through websites or apps.{" "}
           </p>
-          <div className="flex justify-center">
-            <a href="#contact">
-              <button className="rounded-2xl bg-amber-100 font-medium px-2  border-2 ">
+          <div  className="flex justify-center">
+            <a href="#Contact">
+              <button id="#Contact" className="rounded-2xl bg-amber-100 font-medium px-2  border-2 ">
                 Contact Us
               </button>
-            </a>
+           </a>
           </div>
         </div>
         <div>
@@ -70,7 +81,7 @@ function App() {
         </div>
       </div>
 
-      <div  className="bg-[#fcf8ed] flex p-4">
+      <div id="aboutUs"  className="bg-[#fcf8ed] flex p-4">
         <img src={image2} alt="" className="w-96xl h-72 p-4 object-cover" />
 
         <div>
@@ -84,7 +95,7 @@ function App() {
             easier, faster, and more flexible for students all around the world.
           </p>
           <div className="flex justify-center">
-            <a href="#contact">
+            <a href="#Contact">
               <button className="rounded-2xl bg-amber-100 font-medium px-2  border-2 ">
                 Contact Us
               </button>
@@ -93,8 +104,8 @@ function App() {
         </div>
       </div>
 
-      <div className="bg-[#fcf8ed]">
-        <h1 className="text-bold text-amber-500 text-4xl font-medium p-6 text-center">
+      <div id="reviews" className="bg-[#fcf8ed]">
+        <h1  className="text-bold text-amber-500 text-4xl font-medium p-6 text-center">
           Reviews
         </h1>
 
@@ -144,7 +155,7 @@ function App() {
         </div>
       </div>
 
-      <div  className="bg-[#fcf8ed] p-4">
+      <div id="courses"  className="bg-[#fcf8ed] p-4">
         <h1 className="text-bold text-amber-500 text-4xl font-medium p-6 text-center">
           Courses
         </h1>
@@ -194,7 +205,7 @@ function App() {
         </div>
       </div>
 
-      <div  className="p-10 bg-[#fcf8ed]">
+      <div  id='Contact' className="p-10 bg-[#fcf8ed]">
         <h1 className="text-bold text-amber-500 text-4xl font-medium p-6 text-center mb-8">
           Contact Us
         </h1>
@@ -257,8 +268,10 @@ function App() {
           </div>
         </div>
       </div>
+      <ToastContainer/>
     </> 
   );
 }
 
 export default App;
+
