@@ -14,7 +14,7 @@ function App() {
   const [name,setName]=useState("")
   const [email,setEmail]=useState("")
   const [message,setMessage]=useState("")
-
+  const [active, setActive] = useState("home");
   const handleSubmit=(e)=>{
     e.preventDefault()       //stops page reload
 
@@ -47,11 +47,25 @@ function App() {
             <img src={logo}  alt="" className="w-10" />
             eStudy</h1>
           <ul className="flex gap-5 text-black font-medium ">
-         <li><a href="#home">Home</a></li>
-            <li><a href="#aboutUs">About</a></li>
-            <li><a href="#courses">Courses</a></li>
-            <li><a href="#reviews">Review</a></li>
-            <li><a href="#Contact">Contact</a></li>
+         <li><a href="#home" onClick={() => setActive("home")}
+                className={active === "home" ? "text-amber-500 font-extrabold" : ""}
+              >Home</a></li>
+
+            <li><a href="#aboutUs" onClick={() => setActive("aboutUS")}
+                className={active === "aboutUS" ? "text-amber-500 font-extrabold" : ""}
+              >About</a></li>
+
+            <li><a href="#courses" onClick={() => setActive("courses")}
+                className={active === "courses" ? "text-amber-500 font-extrabold" : ""}
+              >Courses</a></li>
+
+            <li><a href="#reviews" onClick={() => setActive("reviews")}
+                className={active === "reviews" ? "text-amber-500 font-extrabold" : ""}
+              >Review</a></li>
+
+            <li><a href="#Contact" onClick={() => setActive("Contact")}
+                className={active === "Contact" ? "text-amber-500 font-extrabold" : ""}
+              >Contact</a></li>
           </ul>
         </div>
       </nav>
